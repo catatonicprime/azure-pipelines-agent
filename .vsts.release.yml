@@ -58,6 +58,7 @@ stages:
     - template: .azure-pipelines/signing.yml
       parameters:
         layoutRoot: ${{ variables.layoutRoot }}
+        isWindows: true
 
     # Create agent package zip
     - script: dev.cmd package Release
@@ -112,6 +113,7 @@ stages:
     - template: .azure-pipelines/signing.yml
       parameters:
         layoutRoot: ${{ variables.layoutRoot }}
+        isWindows: true
 
     # Create agent package zip
     - script: dev.cmd package Release
@@ -138,6 +140,12 @@ stages:
     - template: .vsts.template.nonwindows.yml
       parameters:
         testLogTitle: 'Linux-x64'
+
+    # Signing steps
+    - template: .azure-pipelines/signing.yml
+      parameters:
+        layoutRoot: '_layout/linux-x64'
+        isWindows: false
 
     # Create agent package zip
     - script: ./dev.sh package Release
